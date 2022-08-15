@@ -138,6 +138,7 @@ public class DynamicServerListLoadBalancer<T extends Server> extends BaseLoadBal
         boolean primeConnection = this.isEnablePrimingConnections();
         // turn this off to avoid duplicated asynchronous priming done in BaseLoadBalancer.setServerList()
         this.setEnablePrimingConnections(false);
+        // 开启定时拉取服务列表
         enableAndInitLearnNewServersFeature();
 
         updateListOfServers();

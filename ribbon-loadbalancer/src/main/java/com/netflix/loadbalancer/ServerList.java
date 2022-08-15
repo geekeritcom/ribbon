@@ -32,6 +32,8 @@ public interface ServerList<T extends Server> {
     /**
      * Return updated list of servers. This is called say every 30 secs
      * (configurable) by the Loadbalancer's Ping cycle
+     *
+     * 周期性更新本地服务列表
      * 
      */
     public List<T> getUpdatedListOfServers();   
