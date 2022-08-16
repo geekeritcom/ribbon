@@ -58,10 +58,19 @@ public class Server {
     }
 
     public static final String UNKNOWN_ZONE = "UNKNOWN";
+    /**
+     * IP地址
+     */
     private String host;
+    /**
+     * 端口
+     */
     private int port = 80;
     private String scheme;
     private volatile String id;
+    /**
+     * 当前服务是否在线
+     */
     private volatile boolean isAliveFlag;
     private String zone = UNKNOWN_ZONE;
     private volatile boolean readyToServe = true;

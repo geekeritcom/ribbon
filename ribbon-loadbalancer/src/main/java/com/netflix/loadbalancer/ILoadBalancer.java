@@ -24,6 +24,11 @@ import java.util.List;
  * loadbalancer minimally need a set of servers to loadbalance for, a method to
  * mark a particular server to be out of rotation and a call that will choose a
  * server from the existing list of server.
+ *
+ * 软件层面的负载均衡器的实现，主要包括几部分功能：
+ * 1：获取一系列的服务列表
+ * 2：定义方法来过滤某些服务
+ * 3：从服务列表中选择服务发起调用
  * 
  * @author stonse
  * 

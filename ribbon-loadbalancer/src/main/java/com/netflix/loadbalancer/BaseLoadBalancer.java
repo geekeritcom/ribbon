@@ -61,6 +61,9 @@ public class BaseLoadBalancer extends AbstractLoadBalancer implements
 
     private static Logger logger = LoggerFactory.getLogger(BaseLoadBalancer.class);
 
+    /**
+     * 默认情况下使用轮询算法
+     */
     private final static IRule DEFAULT_RULE = new RoundRobinRule();
     private final static SerialPingStrategy DEFAULT_PING_STRATEGY = new SerialPingStrategy();
     private static final String DEFAULT_NAME = "default";
@@ -68,6 +71,9 @@ public class BaseLoadBalancer extends AbstractLoadBalancer implements
 
     protected IRule rule = DEFAULT_RULE;
 
+    /**
+     * ping服务策略
+     */
     protected IPingStrategy pingStrategy = DEFAULT_PING_STRATEGY;
 
     protected IPing ping = null;
@@ -169,6 +175,7 @@ public class BaseLoadBalancer extends AbstractLoadBalancer implements
     void initWithConfig(IClientConfig clientConfig, IRule rule, IPing ping, LoadBalancerStats stats) {
         this.config = clientConfig;
         this.name = clientConfig.getClientName();
+        // 默认情况下ping服务时间间隔为30秒
         int pingIntervalTime = clientConfig.get(CommonClientConfigKey.NFLoadBalancerPingInterval, 30);
         int maxTotalPingTime = clientConfig.get(CommonClientConfigKey.NFLoadBalancerMaxTotalPingTime, 2);
 

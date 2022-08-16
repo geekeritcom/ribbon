@@ -197,14 +197,16 @@ public abstract class AbstractServerPredicate implements Predicate<PredicateKey>
         return Optional.of(eligible.get(random.nextInt(eligible.size())));
     }
     
-    /**
+    /**≤
      * Choose a server in a round robin fashion after the predicate filters a given list of servers and load balancer key. 
      */
     public Optional<Server> chooseRoundRobinAfterFiltering(List<Server> servers, Object loadBalancerKey) {
+        // 首先对服务列表进行过滤
         List<Server> eligible = getEligibleServers(servers, loadBalancerKey);
         if (eligible.size() == 0) {
             return Optional.absent();
         }
+        // 轮询算法来选择server
         return Optional.of(eligible.get(incrementAndGetModulo(eligible.size())));
     }
         
