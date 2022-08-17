@@ -78,9 +78,16 @@ public class BaseLoadBalancer extends AbstractLoadBalancer implements
 
     protected IPing ping = null;
 
+    /**
+     * 所有服务列表
+     */
     @Monitor(name = PREFIX + "AllServerList", type = DataSourceType.INFORMATIONAL)
     protected volatile List<Server> allServerList = Collections
             .synchronizedList(new ArrayList<Server>());
+
+    /**
+     * 在线服务列表
+     */
     @Monitor(name = PREFIX + "UpServerList", type = DataSourceType.INFORMATIONAL)
     protected volatile List<Server> upServerList = Collections
             .synchronizedList(new ArrayList<Server>());
@@ -279,6 +286,7 @@ public class BaseLoadBalancer extends AbstractLoadBalancer implements
         }
         lbTimer = new ShutdownEnabledTimer("NFLoadBalancer-PingTimer-" + name,
                 true);
+        // 启动ping调度任务
         lbTimer.schedule(new PingTask(), 0, pingIntervalSeconds * 1000);
         forceQuickPing();
     }
